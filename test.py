@@ -6,7 +6,6 @@ from sklearn.cluster import KMeans
 np.random.seed(42)
 num_incidents = 1000
 crime_locations = np.random.rand(num_incidents, 2)  # Random 2D coordinates
-crime_timestamps = np.random.randint(0, 24*60*60, size=num_incidents)  # Random timestamps (seconds of the day)
 
 # Crime Hotspots Analysis
 def identify_hotspots(crime_locations, num_hotspots):
@@ -18,12 +17,15 @@ def identify_hotspots(crime_locations, num_hotspots):
 num_hotspots = 3
 hotspot_centers = identify_hotspots(crime_locations, num_hotspots)
 
+# Debug: Print hotspot centers to verify
+print("Hotspot centers:\n", hotspot_centers)
+
 # Patrol Route Optimization
 def optimize_routes(hotspot_centers, num_patrol_units):
-    # Assign each patrol unit to the nearest hotspot
     patrol_units = []
     for i in range(num_patrol_units):
-        closest_hotspot = np.argmin(np.linalg.norm(hotspot_centers - np.random.rand(2), axis=1))
+        random_point = np.random.rand(2)
+        closest_hotspot = np.argmin(np.linalg.norm(hotspot_centers - random_point, axis=1))
         patrol_units.append(hotspot_centers[closest_hotspot])
     return patrol_units
 
@@ -32,7 +34,6 @@ patrol_units = optimize_routes(hotspot_centers, num_patrol_units)
 
 # Dynamic Route Adjustment (Simulated Real-Time Incidents)
 def simulate_realtime_incidents(hotspot_centers):
-    # Simulate new incident at random hotspot
     new_incident = np.random.choice(len(hotspot_centers))
     return hotspot_centers[new_incident]
 
@@ -51,6 +52,12 @@ for i in range(num_iterations):
     plt.scatter(hotspot_centers[:, 0], hotspot_centers[:, 1], s=100, color='red', marker='x', label='Crime Hotspots')
     plt.scatter(np.array(patrol_units)[:, 0], np.array(patrol_units)[:, 1], s=200, color='green', marker='o', label='Patrol Units')
     plt.scatter(new_incident_location[0], new_incident_location[1], s=300, color='purple', marker='*', label='New Incident')
+    
+    # Plot optimal routes
+    for patrol_unit in patrol_units:
+        for hotspot_center in hotspot_centers:
+            plt.plot([patrol_unit[0], hotspot_center[0]], [patrol_unit[1], hotspot_center[1]], color='black', linestyle='--')
+
     plt.title(f"Iteration {i+1}")
     plt.xlabel('Latitude')
     plt.ylabel('Longitude')
