@@ -49,7 +49,7 @@ for i in range(num_iterations):
     # Visualization
     plt.figure(figsize=(8, 6))
     plt.scatter(crime_locations[:, 0], crime_locations[:, 1], s=20, color='blue', alpha=0.5, label='Crime Incidents')
-    plt.scatter(hotspot_centers[:, 0], hotspot_centers[:, 1], s=100, color='red', marker='x', label='Crime Hotspots')
+    plt.scatter(hotspot_centers[:, 0], hotspot_centers[:, 1], s=200, color='red', marker='x', label='Crime Hotspots')
     plt.scatter(np.array(patrol_units)[:, 0], np.array(patrol_units)[:, 1], s=200, color='green', marker='o', label='Patrol Units')
     plt.scatter(new_incident_location[0], new_incident_location[1], s=300, color='purple', marker='*', label='New Incident')
     
