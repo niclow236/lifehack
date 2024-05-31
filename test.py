@@ -17,9 +17,6 @@ def identify_hotspots(crime_locations, num_hotspots):
 num_hotspots = 3
 hotspot_centers = identify_hotspots(crime_locations, num_hotspots)
 
-# Debug: Print hotspot centers to verify
-print("Hotspot centers:\n", hotspot_centers)
-
 # Patrol Route Optimization
 def optimize_routes(hotspot_centers, num_patrol_units):
     patrol_units = []
