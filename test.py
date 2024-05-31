@@ -68,7 +68,7 @@ def update_crime_map(_):
         x=hotspot_centers[:, 0],
         y=hotspot_centers[:, 1],
         mode='markers',
-        marker=dict(color='red', size=10, symbol='x'),
+        marker=dict(color='red', size=20, symbol='x'),
         name='Crime Hotspots'
     ))
 
