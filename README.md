@@ -2,7 +2,7 @@
 # Subtheme 1: Strengthening Domestic Security
 ## Crime Data Simulation and Analysis
 
- Our solution will simulate crime data as random 2D coordinates, identify crime hotspots using KMeans clustering, and optimise patrol routes for a given number of patrol units. We dynamically adjusted these routes based on simulated real-time incidents and visualised the results.
+ Our solution will simulate crime data as random 2D coordinates (using latitude and longitude), identify crime hotspots using KMeans clustering, and optimise patrol routes for a given number of patrol units. We dynamically adjusted these routes based on simulated real-time incidents and visualised the results.
 
 ### Features
 
@@ -18,6 +18,8 @@
 - numpy
 - matplotlib
 - scikit-learn
+- dash
+- plotly
 
 ### Installation
 
@@ -31,7 +33,7 @@
 2. **Install dependencies**
 
    ```
-   pip install numpy matplotlib scikit-learn
+   pip install numpy matplotlib scikit-learn dash plotly
    ```
 
 ### Usage
@@ -46,7 +48,7 @@ Run the script to perform the crime data simulation, hotspot identification, pat
 
 #### 1. Crime Data Generation
 
-The script starts by generating simulated crime data as random 2D coordinates. This represents the locations of crime incidents within a unit square area.
+The script starts by generating simulated crime data as random 2D coordinates. This represents the locations of crime incidents within a unit square area. Since we do not have access to the crime data about the location and details of crimes, we have decided to randomise the location of crimes for demonstration purposes. If we do have access to crime data, we can calculate the risk factor for each location based on metrics such as frequency and severity of crimes.
 
    ```
    import numpy as np
