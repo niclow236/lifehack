@@ -2,12 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-# Simulate crime data generation
+# Simulate crime data
 np.random.seed(42)
 num_incidents = 1000
 crime_locations = np.random.rand(num_incidents, 2)  # Random 2D coordinates
 
-# Crime Hotspots Analysis
+# Identify crime hotspots
 def identify_hotspots(crime_locations, num_hotspots):
     kmeans = KMeans(n_clusters=num_hotspots, random_state=42)
     kmeans.fit(crime_locations)
@@ -17,33 +17,25 @@ def identify_hotspots(crime_locations, num_hotspots):
 num_hotspots = 3
 hotspot_centers = identify_hotspots(crime_locations, num_hotspots)
 
-# Debug: Print hotspot centers to verify
-print("Hotspot centers:\n", hotspot_centers)
-
-# Patrol Route Optimization
+# Optimize patrol routes
 def optimize_routes(hotspot_centers, num_patrol_units):
     patrol_units = []
-    for i in range(num_patrol_units):
-        random_point = np.random.rand(2)
-        closest_hotspot = np.argmin(np.linalg.norm(hotspot_centers - random_point, axis=1))
-        patrol_units.append(hotspot_centers[closest_hotspot])
+    units_per_hotspot = num_patrol_units // len(hotspot_centers)
+    for hotspot in hotspot_centers:
+        for _ in range(units_per_hotspot):
+            patrol_units.append(hotspot)
     return patrol_units
 
 num_patrol_units = 5
 patrol_units = optimize_routes(hotspot_centers, num_patrol_units)
 
-# Dynamic Route Adjustment (Simulated Real-Time Incidents)
-def simulate_realtime_incidents(hotspot_centers):
-    new_incident = np.random.choice(len(hotspot_centers))
-    return hotspot_centers[new_incident]
+# Simulate real-time incidents and dynamically adjust patrol routes
+def simulate_realtime_incidents():
+    return np.random.rand(2)
 
-# Main Simulation Loop
 num_iterations = 10
 for i in range(num_iterations):
-    # Simulate real-time incident
-    new_incident_location = simulate_realtime_incidents(hotspot_centers)
-    
-    # Update patrol routes based on new incident
+    new_incident_location = simulate_realtime_incidents()
     patrol_units = optimize_routes(np.vstack([hotspot_centers, new_incident_location]), num_patrol_units)
     
     # Visualization
