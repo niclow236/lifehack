@@ -91,9 +91,9 @@ The script then optimizes patrol routes by assigning patrol units to the identif
 Simulating real-time incidents by randomly selecting one of the hotspot locations.
 
    ```
-   def simulate_realtime_incidents(hotspot_centers):
-      new_incident = np.random.choice(len(hotspot_centers))
-      return hotspot_centers[new_incident]
+   def simulate_realtime_incidents():
+      new_incident = np.random.rand(2)  # Random 2D coordinates
+      return new_incident
    ```
 
 #### 5. Initial Hotspot Identification and Patrol Route Optimization

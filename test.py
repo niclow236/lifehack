@@ -27,12 +27,12 @@ def optimize_routes(hotspot_centers, num_patrol_units):
     return patrol_units
 
 # Dynamic Route Adjustment (Simulated Real-Time Incidents)
-def simulate_realtime_incidents(hotspot_centers):
-    new_incident = np.random.choice(len(hotspot_centers))
-    return hotspot_centers[new_incident]
+def simulate_realtime_incidents():
+    new_incident = np.random.rand(2)  # Random 2D coordinates
+    return new_incident
 
 # Initial hotspot identification and patrol route optimization
-num_hotspots = 3
+num_hotspots = 10
 hotspot_centers = identify_hotspots(crime_locations, num_hotspots)
 num_patrol_units = 5
 patrol_units = optimize_routes(hotspot_centers, num_patrol_units)
@@ -84,7 +84,7 @@ def update_crime_map(_):
     ))
 
     # Plot new incident
-    new_incident_location = simulate_realtime_incidents(hotspot_centers)
+    new_incident_location = simulate_realtime_incidents()
     fig.add_trace(go.Scatter(
         x=[new_incident_location[0]],
         y=[new_incident_location[1]],
@@ -93,16 +93,15 @@ def update_crime_map(_):
         name='New Incident'
     ))
 
-    # Plot optimal routes
+    # Plot lines from patrol units to new incident
     for patrol_unit in patrol_units:
-        for hotspot_center in hotspot_centers:
-            fig.add_trace(go.Scatter(
-                x=[patrol_unit[0], hotspot_center[0]],
-                y=[patrol_unit[1], hotspot_center[1]],
-                mode='lines',
-                line=dict(color='black', width=1, dash='dash'),
-                showlegend=False
-            ))
+        fig.add_trace(go.Scatter(
+            x=[patrol_unit[0], new_incident_location[0]],
+            y=[patrol_unit[1], new_incident_location[1]],
+            mode='lines',
+            line=dict(color='black', width=1, dash='dash'),
+            showlegend=False
+        ))
 
     fig.update_layout(
         title='Crime Map',
